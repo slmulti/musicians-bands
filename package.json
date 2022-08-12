@@ -4,7 +4,8 @@
   "description": "A Sequelize DB for bands to organize their songs and musicians",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest"
+    
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,7 @@
     "jest": "27.5.1",
     "sequelize": "6.17.0",
     "sqlite3": "5.0.2"
-  }
+  },
+  "homepage": "https://github.com/MultiverseLearningProducts/musicians-bands#readme",
+  "devDependencies": {}
 }
