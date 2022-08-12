@@ -13,7 +13,7 @@ describe('Band and Musician Models', () => {
     })
 
     test('can create a Band', async () => {
-        // TODO - test creating a band
+        // done - test creating a band
 
         const testCreateBand = await Band.create(Band[0])
         expect(testCreateBand.name).toEqual(Band[0])
@@ -21,10 +21,37 @@ describe('Band and Musician Models', () => {
     })
 
     test('can create a Musician', async () => {
-        // TODO - test creating a musician
+        // done - test creating a musician
 
         const testCreateMusician = await Musician.create(Musician[0])
         expect(testCreateMusician.name).toEqual(Musician[0])
         // expect('NO TEST').toBe('EXPECTED VALUE HERE');
+    })
+
+    test('Band can have many Musician', async () => {
+
+        await db.sync({ force: true });
+
+        let newBand = await Band.create({
+            name: 'Foo Fighters',
+            genre: 'Rock'            
+        })
+
+        let newMusician = await Musician.create({
+            name: 'Dave Grohl',
+            instrument: 'Singer'            
+        })
+
+        let oldMusician = await Musician.create({
+            name: 'Lemmy',
+            instrument: 'Bass'            
+        })
+
+        await newBand.addMusician(newMusician)
+        await newBand.addMusician(oldMusician)
+
+        const musicians = await newBand.getMusicians()
+
+        expect(musicians[0] instanceof Musician).toBe(true)
     })
 })
