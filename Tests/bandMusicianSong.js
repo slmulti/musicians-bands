@@ -1,4 +1,4 @@
-const { Band, Musician, Song} = require(../../index)
+const { Band, Musician, Song} = require('/Users/simon/Desktop/multiverse/W6D4/musicians-bands/index')
 const {db} = require('../db')
 
 //======================================================================
@@ -66,6 +66,83 @@ const {db} = require('../db')
 // mainMusician()
 
 //======================================================================
-// Create Musician
+// Create Song
 //======================================================================
 
+// async function mainSong(){
+
+//     await Song.sync({force:true})
+
+//     await Song.create({
+//         title: 'Best of You',
+//         year: 2005
+//     })
+
+//     await Song.create({
+//         title: 'Ace of Spades',
+//         year: 1980
+//     })
+
+// }
+
+// mainSong()
+
+const seedBand = [
+    {
+        name: 'Foo Fighters',
+        genre: 'Rock'
+    },
+    {
+        name: 'Guns N Roses',
+        genre: 'Rock'
+    },
+    {
+        name: 'Motorhead',
+        genre: 'Heavy Rock'
+    },
+    {
+        name: 'Stevie Wonder',
+        genre: 'Rock n Roll'
+    }
+
+]
+
+const seedMusician = [
+    {
+        name: 'Dave Grohl',
+        instrument: 'Singer'
+    },
+    {
+        name: 'Slash',
+        instrument: 'Guitar'
+    },
+    {
+        name: 'Lemmy',
+        instrument: 'Bass'
+    },
+    {
+        name: 'Stevie Wonder',
+        instrument: 'Keyboard'
+    },
+]
+
+const seedSong = [
+    {
+        title: 'Best of You',
+        year: 2005
+    },
+    {
+        title: 'Ace of Spades',
+        year: 1980
+    },
+    {
+        title: 'Welcome to the Jungle',
+        year: 1987
+    },
+    {
+        title: 'Superstition',
+        year: 1972
+    }
+]
+
+module.exports = { seedBand, seedMusician, seedSong }

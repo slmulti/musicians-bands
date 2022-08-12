@@ -1,5 +1,6 @@
 const {db} = require('./db');
-const {Band, Musician} = require('./index')
+const {Band, Musician, Song} = require('./index')
+const { seedBand, seedMusician, seedSong } = require('./Tests/bandMusicianSong')
 
 describe('Band and Musician Models', () => {
     /**
@@ -53,5 +54,43 @@ describe('Band and Musician Models', () => {
         const musicians = await newBand.getMusicians()
 
         expect(musicians[0] instanceof Musician).toBe(true)
+    })
+
+    test('Song belong to many Band and Band can have many Song', async () => {
+
+        await db.sync({ force: true });
+
+        //create bands
+        let band1 = await Band.create(seedBand[0])
+        let band2 = await Band.create(seedBand[1])
+
+        //create songs
+        let song1 = await Song.create(seedSong[0])
+        let song2 = await Song.create(seedSong[1])
+
+        await band1.addSong(song1)
+        await band1.addSong(song2)
+
+        await band2.addSong(song1)
+        await band2.addSong(song2)
+
+        const songs1 = await band1.getSongs()
+        const songs2 = await band2.getSongs()
+
+        expect(songs1[0] instanceof Song).toBe(true)
+        expect(songs2[0] instanceof Song).toBe(true)
+
+        // await song1.addBand(band1)
+        // await song1.addBand(band2)
+
+        // await song2.addBand(band1)
+        // await song2.addBand(band2)
+
+        // const bands1 = await song1.getBands()
+        // const bands2 = await song1.getBands()
+
+        // expect(bands1[0] instanceof Band).toBe(true)
+        // expect(bands2[0] instanceof Band).toBe(true)
+
     })
 })
